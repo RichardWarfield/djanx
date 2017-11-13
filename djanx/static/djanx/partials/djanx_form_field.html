@@ -1,0 +1,63 @@
+
+
+<div ng-switch on="ctrl.getClass()" ng-hide="ctrl.schema.hidden">
+    <div ng-switch-when="Choice">
+        <label class="control-label" ng-class="ctrl.labelClasses" for={{ctrl.getName()}}>
+            {{ctrl.schema.label}}
+        </label>
+        <div ng-class="ctrl.controlDivClasses">
+            <select id="{{ctrl.getName()}}" name="{{ctrl.getName()}}" class="form-control" ng-class="ctrl.inputClasses" 
+                ng-model="ctrl.ngModel" ng-options="opt.pk as opt.text for opt in ctrl.schema.choices" 
+                ng-required="ctrl.getRequired()" ng-disabled="ctrl.getDisabled()" ng-change="ctrl.onChange()"></select>
+        </div>
+    </div>
+    <div ng-switch-when="BooleanField">
+        <label class="control-label" ng-class="ctrl.labelClasses" for={{ctrl.getName()}}>{{ctrl.schema.label}}</label>
+        <div class="checkbox" ng-class="ctrl.controlDivClasses">
+            <input id="{{ctrl.getName()}}" name="{{ctrl.getName()}}" type="checkbox" ng-class="ctrl.inputClasses" 
+                    ng-model="ctrl.ngModel" ng-required="ctrl.getRequired()" ng-disabled="ctrl.getDisabled()" 
+                    ng-change="ctrl.onChange()" style="margin-left:0px;"></input> <!-- Undo the -20px bootstrap margin-->
+        </div>
+    </div>
+    <div ng-switch-when="FloatField">
+        <label for="{{ctrl.getName()}}" class="control-label" ng-class="ctrl.labelClasses">{{ctrl.schema.label}}</label>
+        <div ng-class="ctrl.controlDivClasses">
+            <input id="{{ctrl.getName()}}" name="{{ctrl.getName()}}" class="form-control" ng-class="ctrl.controlClasses" 
+            type="number" ng-model="ctrl.ngModel" min="{{ctrl.getMin()}}" step="any" ng-required="ctrl.getRequired()"
+            ng-disabled="ctrl.getDisabled()" ng-min="ctrl.getMin()" ng-max="ctrl.getMax()" ng-change="ctrl.onChange()"></input>
+        </div>
+    </div>
+    <div ng-switch-when="CharField">
+        <label for="{{ctrl.getName()}}" class="control-label {{ctrl.labelClasses}}">{{ctrl.schema.label}}</label>
+        <div class="{{ctrl.controlDivClasses}}">
+            <input id="{{ctrl.getName()}}" name="{{ctrl.getName()}}" class="form-control {{ctrl.controlClasses}}" type="text" 
+            ng-model="ctrl.ngModel" ng-required="ctrl.getRequired()" ng-disabled="ctrl.getDisabled()"
+            ng-minlength="ctrl.getMinlength()" ng-maxlength="ctrl.getMaxlength()" ng-change="ctrl.onChange()"
+            ng-model-options="{ updateOn: 'blur'}"></input>
+        </div>
+    </div>
+    <div ng-switch-when="JSONField">
+        <label for="{{ctrl.getName()}}" class="control-label {{ctrl.labelClasses}}">{{ctrl.schema.label}}</label>
+        <div class="{{ctrl.controlDivClasses}}">
+            <input json-field id="{{ctrl.getName()}}" name="{{ctrl.getName()}}" class="form-control {{ctrl.controlClasses}}"
+            type="text" ng-model="ctrl.ngModel" ng-required="ctrl.getRequired()" ng-disabled="ctrl.getDisabled()"
+            ng-minlength="ctrl.getMinlength()" ng-maxlength="ctrl.getMaxlength()" ng-change="ctrl.onChange()"
+            ng-model-options="{ updateOn: 'blur'}"></input>
+        </div>
+    </div>
+    <div ng-switch-when="DateField">
+        <label for="{{ctrl.getName()}}" class="control-label" ng-class="ctrl.labelClasses">{{ctrl.schema.label}}</label>
+        <div ng-class="ctrl.controlDivClasses">
+            <date-picker id="{{ctrl.getName()}}" name="{{ctrl.getName()}}" date="ctrl.ngModel" ng-required="ctrl.getRequired()" 
+                on-change="ctrl.onChange()" ng-disabled="ctrl.getDisabled()"/>
+        </div>
+    </div>
+    <div ng-switch-default>
+        <label for="{{ctrl.getName()}}" class="control-label" ng-class="ctrl.labelClasses">{{ctrl.schema.label}}</label>
+        <div ng-class="ctrl.controlDivClasses">
+            <input id="{{ctrl.getName()}}" name="{{ctrl.getName()}}" class="form-control" ng-class="ctrl.controlClasses"
+            type="text" ng-model="ctrl.ngModel" ng-required="ctrl.getRequired()" ng-disabled="ctrl.getDisabled()"
+            ng-minlength="ctrl.getMinlength()" ng-maxlength="ctrl.getMaxlength()" ng-change="ctrl.onChange()"></input>
+        </div>
+    </div>
+</div>

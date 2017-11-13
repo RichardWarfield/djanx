@@ -1,0 +1,48 @@
+{% load staticfiles %}
+{% csrf_token %}
+<!doctype html>
+<html lang="en" ng-app="djangular-demo">
+<head>
+	<title>Djanx Demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static "angular/angular.js" %}"></script>
+    <script src="{% static "angular-bootstrap/ui-bootstrap-tpls.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap.min.css" %}">
+    <link rel='stylesheet' href="{% static "angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" %}" />
+</head>
+
+<body ng-controller="TestAppCtrl as appCtrl" ng-init="appCtrl.user='{{user.username}}'">
+{% verbatim %}
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/dashboard">TestApp</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li><a>Logged in as {{appCtrl.user}}</a></li>
+                <li><a href="#" ng-click="appCtrl.logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="container-fluid" id="page-wrapper">
+
+            <div ng-view></div>
+
+
+        </div>
+
+    </div>
+{% endverbatim %}
+</body>
+
+</html>
